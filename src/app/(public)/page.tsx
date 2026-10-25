@@ -1,9 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { ProductCatalog } from "@/components/product-catalog";
 
-const heroImage = "https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1500&q=85";
+const heroImage = "https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1280&q=72";
 
 export default function HomePage() {
   return (
@@ -18,7 +17,7 @@ export default function HomePage() {
           </div>
         </div>
         <div className="hero-visual">
-          <Image alt="Pour-over coffee being prepared at the café" className="hero-image" fill priority sizes="(max-width: 680px) 100vw, 50vw" src={heroImage} />
+          <img alt="Pour-over coffee being prepared at the café" className="hero-image" decoding="async" fetchPriority="high" src={heroImage} />
         </div>
       </section>
 
@@ -36,7 +35,7 @@ export default function HomePage() {
 
       <section className="home-about">
         <div className="home-about-image">
-          <Image alt="Hands holding a freshly made cup of coffee" fill sizes="(max-width: 680px) 100vw, 50vw" src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1100&q=85" />
+          <img alt="Hands holding a freshly made cup of coffee" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=68" />
         </div>
         <div className="home-about-copy">
           <p className="eyebrow">About Goodkind</p>

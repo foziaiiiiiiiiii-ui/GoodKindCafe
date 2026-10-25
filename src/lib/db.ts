@@ -1,15 +1,7 @@
 import { mkdirSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { DatabaseSync } from "node:sqlite";
-
-const seedProducts = [
-  ["honey-oat-latte", "Honey oat latte", "Coffee", 600, "Double espresso · oat milk · local honey", "photo-1461023058943-07fcbe16d735"],
-  ["maple-cloud", "Maple cloud", "Coffee", 650, "Cold brew · maple cream · pinch of sea salt", "photo-1517701604599-bb29b565090c"],
-  ["piccolo", "Piccolo", "Coffee", 450, "A little latte with a big personality", "photo-1570968915860-54d5c301fa9f"],
-  ["matcha-morning", "Matcha morning", "Not coffee", 600, "Ceremonial matcha · your choice of milk", "photo-1515823064-d6e0c04616a7"],
-  ["cardamom-bun", "Cardamom bun", "Something good", 500, "Twisted by hand · baked every morning", "photo-1509365465985-25d11c17e812"],
-  ["olive-oil-cake", "Olive oil cake", "Something good", 600, "Citrus, good olive oil, no occasion needed", "photo-1578985545062-69928b1d9587"],
-] as const;
+import { defaultProducts } from "@/lib/default-products";
 
 const databasePath = resolve(process.env.DATABASE_PATH || "./data/goodkind.sqlite");
 mkdirSync(dirname(databasePath), { recursive: true });
@@ -52,7 +44,9 @@ if (db.prepare("SELECT COUNT(*) AS count FROM products").get()?.count === 0) {
   `);
   db.exec("BEGIN");
   try {
-    for (const product of seedProducts) insert.run(...product);
+    for (const product of defaultProducts) {
+      insert.run(product.id, product.name, product.category, product.priceCents, product.note, product.image);
+    }
     db.exec("COMMIT");
   } catch (error) {
     db.exec("ROLLBACK");

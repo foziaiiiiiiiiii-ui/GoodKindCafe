@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
@@ -15,7 +14,7 @@ export default function AboutPage() {
       </section>
       <section className="about-story-grid">
         <div className="about-story-image">
-          <Image alt="A barista making coffee by hand" fill sizes="(max-width: 680px) 100vw, 50vw" src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1100&q=85" />
+          <img alt="A barista making coffee by hand" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=68" />
         </div>
         <div className="about-story-copy">
           <p className="eyebrow">Our approach</p>

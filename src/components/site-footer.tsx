@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { ArrowUpRight, Instagram } from "lucide-react";
+import Link from "next/link";
 import { Brand } from "@/components/brand";
 
 export function SiteFooter() {
@@ -24,7 +24,6 @@ export function SiteFooter() {
       </div>
       <div className="footer-bottom">
         <span>© 2026 Goodkind Coffee Co.</span>
-        <Link href="/admin">Admin</Link>
         <a href="#top">Back to top ↑</a>
       </div>
     </footer>

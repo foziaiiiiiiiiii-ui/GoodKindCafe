@@ -1,0 +1,58 @@
+import type { Product } from "@/lib/types";
+
+export const defaultProducts: Product[] = [
+  {
+    id: "honey-oat-latte",
+    name: "Honey oat latte",
+    category: "Coffee",
+    priceCents: 600,
+    note: "Double espresso · oat milk · local honey",
+    image: "photo-1461023058943-07fcbe16d735",
+    available: 1,
+  },
+  {
+    id: "maple-cloud",
+    name: "Maple cloud",
+    category: "Coffee",
+    priceCents: 650,
+    note: "Cold brew · maple cream · pinch of sea salt",
+    image: "photo-1517701604599-bb29b565090c",
+    available: 1,
+  },
+  {
+    id: "piccolo",
+    name: "Piccolo",
+    category: "Coffee",
+    priceCents: 450,
+    note: "A little latte with a big personality",
+    image: "photo-1570968915860-54d5c301fa9f",
+    available: 1,
+  },
+  {
+    id: "matcha-morning",
+    name: "Matcha morning",
+    category: "Not coffee",
+    priceCents: 600,
+    note: "Ceremonial matcha · your choice of milk",
+    image: "photo-1515823064-d6e0c04616a7",
+    available: 1,
+  },
+  {
+    id: "cardamom-bun",
+    name: "Cardamom bun",
+    category: "Something good",
+    priceCents: 500,
+    note: "Twisted by hand · baked every morning",
+    image: "photo-1509365465985-25d11c17e812",
+    available: 1,
+  },
+  {
+    id: "olive-oil-cake",
+    name: "Olive oil cake",
+    category: "Something good",
+    priceCents: 600,
+    note: "Citrus, good olive oil, no occasion needed",
+    image: "photo-1578985545062-69928b1d9587",
+    available: 1,
+  },
+];

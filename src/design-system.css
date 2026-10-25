@@ -1,6 +1,6 @@
 :root {
   color-scheme: light;
-  font-family: "Geltek", Georgia, "Times New Roman", serif;
+  font-family: "Arial", "Helvetica Neue", sans-serif;
   color: #29362c;
   background: #fffdf8;
   font-synthesis: none;
@@ -20,7 +20,7 @@
   --color-sage: #e4eadc;
   --color-border: #e6e1d6;
 
-  --font-body: "Geltek", Arial, sans-serif;
+  --font-body: "Arial", "Helvetica Neue", sans-serif;
   --font-display: "Geltek", Georgia, "Times New Roman", serif;
   --text-xs: 0.6875rem;
   --text-sm: 0.8125rem;

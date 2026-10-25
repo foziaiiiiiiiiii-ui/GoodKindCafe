@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { ArrowUpRight, Clock3, MapPin, Phone } from "lucide-react";
 
 export const metadata: Metadata = { title: "Find us" };
@@ -38,7 +37,7 @@ export default function FindUsPage() {
           </div>
         </div>
         <a aria-label="Open directions to Goodkind in Google Maps" className="find-photo" href={mapUrl} rel="noreferrer" target="_blank">
-          <Image alt="Interior of a neighborhood café" fill sizes="(max-width: 760px) 100vw, 56vw" src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1200&q=85" />
+          <img alt="Interior of a neighborhood café" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1000&q=68" />
           <span className="find-map-link">Open map <ArrowUpRight size={15} /></span>
         </a>
       </section>

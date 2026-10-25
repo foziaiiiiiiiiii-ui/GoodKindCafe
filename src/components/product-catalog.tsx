@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { ArrowRight, ArrowUpRight, Plus, X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { useCafe } from "@/components/cafe-provider";
@@ -8,7 +7,7 @@ import { Product } from "@/lib/types";
 
 const filters = ["Everything", "Coffee", "Not coffee", "Something good"];
 const photo = (id: string, width = 700) =>
-  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${width}&q=85`;
+  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${width}&q=70`;
 const money = (cents: number) => `$${(cents / 100).toFixed(2)}`;
 
 export function ProductCatalog({ featured = false }: { featured?: boolean }) {
@@ -67,7 +66,7 @@ export function ProductCatalog({ featured = false }: { featured?: boolean }) {
               type="button"
             >
               <span className="menu-card-image">
-                <Image alt={product.name} fill sizes="(max-width: 680px) 48vw, (max-width: 1000px) 30vw, 360px" src={photo(product.image)} />
+                <img alt={product.name} decoding="async" loading="lazy" src={photo(product.image)} />
                 <span className="quick-view-label">View details <ArrowUpRight size={14} /></span>
               </span>
             </button>
@@ -93,7 +92,7 @@ export function ProductCatalog({ featured = false }: { featured?: boolean }) {
         }}>
           <section aria-labelledby="quick-view-title" aria-modal="true" className="quick-view-dialog" role="dialog">
             <button aria-label="Close product details" autoFocus className="quick-view-close" onClick={() => setSelected(null)} type="button"><X size={21} /></button>
-            <div className="quick-view-image"><Image alt={selected.name} fill sizes="(max-width: 520px) 90vw, 380px" src={photo(selected.image, 900)} /></div>
+            <div className="quick-view-image"><img alt={selected.name} decoding="async" loading="eager" src={photo(selected.image, 800)} /></div>
             <div className="quick-view-copy">
               <span className="product-category-label">{selected.category}</span>
               <h2 id="quick-view-title">{selected.name}</h2>
@@ -107,7 +106,7 @@ export function ProductCatalog({ featured = false }: { featured?: boolean }) {
         </div>
       )}
       {added && <div aria-live="polite" className="cart-toast">{added} added to bag <ArrowRight size={14} /></div>}
-      {featured && products.length > 6 && <a className="button button-outline menu-full-link" href="/menu">Full menu <ArrowRight size={16} /></a>}
+      {featured && <a className="cafe-button cafe-button-outline menu-full-link" href="/menu">Full menu <ArrowRight size={16} /></a>}
     </>
   );
 }

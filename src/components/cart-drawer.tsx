@@ -1,12 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import { ArrowRight, Minus, Plus, ShoppingBag, Trash2, X } from "lucide-react";
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import { useCafe } from "@/components/cafe-provider";
 
 const imageUrl = (id: string, width = 240) =>
-  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${width}&q=80`;
+  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${width}&q=65`;
 
 const money = (cents: number) => `$${(cents / 100).toFixed(2)}`;
 
@@ -93,7 +92,7 @@ export function CartDrawer() {
             <div className="cart-items">
               {lines.length ? lines.map(({ product, productId, quantity }) => (
                 <article className="cart-line" key={productId}>
-                  <Image alt="" height={76} src={imageUrl(product.image)} width={76} />
+                  <img alt="" decoding="async" height={76} loading="lazy" src={imageUrl(product.image)} width={76} />
                   <div className="cart-line-info">
                     <strong>{product.name}</strong>
                     <span>{money(product.priceCents)}</span>

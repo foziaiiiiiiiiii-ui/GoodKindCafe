@@ -10,6 +10,7 @@ import {
   type ReactNode,
 } from "react";
 import { CartItem, Product } from "@/lib/types";
+import { defaultProducts } from "@/lib/default-products";
 
 type CafeContextValue = {
   products: Product[];
@@ -29,10 +30,10 @@ const CafeContext = createContext<CafeContextValue | null>(null);
 const storageKey = "goodkind-cart-v1";
 
 export function CafeProvider({ children }: { children: ReactNode }) {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<Product[]>(defaultProducts);
   const [cart, setCart] = useState<CartItem[]>([]);
   const [cartOpen, setCartOpen] = useState(false);
-  const [loadingProducts, setLoadingProducts] = useState(true);
+  const [loadingProducts, setLoadingProducts] = useState(false);
   const [productError, setProductError] = useState("");
 
   const refreshProducts = useCallback(async () => {
