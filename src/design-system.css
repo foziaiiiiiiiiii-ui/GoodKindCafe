@@ -1,0 +1,56 @@
+:root {
+  color-scheme: light;
+  font-family: "DM Sans", sans-serif;
+  color: #29362c;
+  background: #fffdf8;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-optical-sizing: auto;
+  scroll-behavior: smooth;
+
+  --color-ink: #29362c;
+  --color-ink-soft: #424d42;
+  --color-muted: #72766c;
+  --color-cream: #fffdf8;
+  --color-surface: #f4efe5;
+  --color-accent: #d77751;
+  --color-accent-soft: #f4e7d8;
+  --color-sage: #e4eadc;
+  --color-border: #e6e1d6;
+
+  --font-body: "DM Sans", sans-serif;
+  --font-display: "DM Serif Display", Georgia, serif;
+  --text-xs: 0.6875rem;
+  --text-sm: 0.8125rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+
+  --space-unit: 0.25rem;
+  --radius-pill: 999px;
+  --radius-card: 0;
+  --shadow-popover: 0 24px 80px rgb(0 0 0 / 20%);
+
+  --motion-fast: 160ms;
+  --motion-base: 240ms;
+  --motion-slow: 650ms;
+  --ease-standard: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  --ink: var(--color-ink);
+  --muted: var(--color-muted);
+  --cream: var(--color-cream);
+  --soft: var(--color-surface);
+  --orange: var(--color-accent);
+  --sage: var(--color-sage);
+  --serif: var(--font-display);
+}
+
+* { box-sizing: border-box; }
+body { min-width: 320px; margin: 0; }
+button, input { font: inherit; }
+a { color: inherit; text-decoration: none; }
+button { color: inherit; }
+img { display: block; width: 100%; }
+::selection { color: var(--cream); background: var(--orange); }
+:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
