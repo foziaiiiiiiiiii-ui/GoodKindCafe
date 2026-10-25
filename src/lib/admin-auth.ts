@@ -1,6 +1,6 @@
 import { createHmac, randomBytes, timingSafeEqual } from "node:crypto";
 import { NextRequest, NextResponse } from "next/server";
-import { assertSameOrigin, HttpError } from "@/lib/http";
+import { assertSameOrigin, cleanText, HttpError, readJson } from "@/lib/http";
 
 const cookieName = "goodkind_admin";
 const ttlSeconds = 8 * 60 * 60;
@@ -53,8 +53,8 @@ export async function login(request: NextRequest) {
   if (attempt && attempt.expiresAt > now && attempt.count >= 8) {
     throw new HttpError(429, "Too many sign-in attempts. Try again in 15 minutes.");
   }
-  const body = await request.json().catch(() => ({})) as { password?: unknown };
-  const password = typeof body.password === "string" ? body.password : "";
+  const body = await readJson(request);
+  const password = cleanText(body.password, "Password", 256);
   if (!passwordMatches(password)) {
     const next = !attempt || attempt.expiresAt < now
       ? { count: 1, expiresAt: now + 15 * 60 * 1000 }

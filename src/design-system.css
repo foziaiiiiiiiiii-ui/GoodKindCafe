@@ -1,6 +1,6 @@
 :root {
   color-scheme: light;
-  font-family: "DM Sans", sans-serif;
+  font-family: "Geltek", Georgia, "Times New Roman", serif;
   color: #29362c;
   background: #fffdf8;
   font-synthesis: none;
@@ -20,8 +20,8 @@
   --color-sage: #e4eadc;
   --color-border: #e6e1d6;
 
-  --font-body: "DM Sans", sans-serif;
-  --font-display: "DM Serif Display", Georgia, serif;
+  --font-body: "Geltek", Arial, sans-serif;
+  --font-display: "Geltek", Georgia, "Times New Roman", serif;
   --text-xs: 0.6875rem;
   --text-sm: 0.8125rem;
   --text-base: 1rem;

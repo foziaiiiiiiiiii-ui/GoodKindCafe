@@ -1,43 +1,33 @@
-# Goodkind Cafe
+# Goodkind Café
 
-A multi-page, fully responsive café website built with an editorial, warm minimalist aesthetic. The project also includes a completely separate, data-dense Admin Dashboard inspired by Cloudflare's Kumo design system.
+A multi-page Next.js App Router café site with an editorial public storefront, responsive pickup cart, SQLite-backed order API, and a password-protected operations dashboard.
 
-## Overview
+## Requirements
 
-This repository contains two distinct user interfaces sharing a single Next.js codebase:
+- Node.js 24 or newer (`node:sqlite` is built into Node 24).
+- npm.
 
-1. **The Public Website**: A high-end, editorial café experience featuring large typography, generous whitespace, and a warm, minimalist color palette. It includes the Home page, a full Menu, an About page, and a Find Us page.
-2. **The Admin Dashboard**: A dark-mode, developer-tool aesthetic based on Cloudflare's Kumo design system. It features data-dense layouts, a sidebar navigation, and a usage metrics panel. 
+## Run locally
 
-The design systems are strictly separated. The public site uses the Geltek font and a cream/sage palette. The admin site uses system UI fonts and a high-contrast dark palette.
+1. Copy `.env.example` to `.env`.
+2. Set `ADMIN_PASSWORD` to a unique password.
+3. Set `SESSION_SECRET` to a random value with at least 32 characters.
+4. Run `npm install`, then `npm run dev`.
+5. Open `http://localhost:3000`; the admin dashboard is at `http://localhost:3000/admin`.
 
-## Tech Stack
+The database is created at `data/goodkind.sqlite` on first run. Seed menu products are inserted only when the products table is empty. Prices are stored as integer cents; order totals are recalculated on the server from the current catalog.
 
-- **Framework**: Next.js (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **Components**: shadcn/ui
-- **Icons**: Lucide React (Public), Phosphor Icons (Admin)
+## Production
 
-## Project Structure
+Run `npm run build`, then `npm start`. Use a Node.js host with a persistent writable disk, back up the `data` directory, and keep `.env` private. Admin sign-in stays disabled unless both environment secrets are set.
 
-```text
-├── app/
-│   ├── (public)/
-│   │   ├── page.tsx          # Home page
-│   │   ├── menu/page.tsx     # Full menu page
-│   │   ├── about/page.tsx    # About page
-│   │   └── find-us/page.tsx  # Visit/Location page
-│   ├── admin/
-│   │   ├── layout.tsx        # Admin shell (Sidebar, TopNav)
-│   │   └── page.tsx          # Admin dashboard main view
-│   ├── globals.css           # Tailwind directives and Geltek font-face
-│   └── layout.tsx            # Root layout
-├── components/
-│   ├── public/               # Navbar, Footer, ProductCard
-│   └── admin/                # Sidebar, TopNav, DataTable
-├── public/
-│   └── fonts/                # Place Geltek font files here
-├── tailwind.config.ts
-├── package.json
-└── README.md
+## Pages and API
+
+- Public pages: `/`, `/menu`, `/about`, `/find-us`.
+- Admin: `/admin`.
+- Public API: `GET /api/products`, `POST /api/orders`.
+- Admin API: `/api/admin/session`, `/api/admin/products`, `/api/admin/orders`.
+
+Admin can create and edit products, archive them from the public menu, view pickup orders, and update order status. Archiving preserves old orders. The cart persists in the visitor's browser until an order is submitted.
+
+The public design tokens and typography live in `src/design-system.css`; admin-only colors and layout live in `src/app/admin.css`. If Geltek is installed locally, the public pages use it; otherwise they use the editorial serif/sans fallback stack. Admin typography remains system UI.

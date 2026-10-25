@@ -72,6 +72,12 @@ export function CafeProvider({ children }: { children: ReactNode }) {
     localStorage.setItem(storageKey, JSON.stringify(cart));
   }, [cart]);
 
+  useEffect(() => {
+    if (loadingProducts) return;
+    const availableIds = new Set(products.map((product) => product.id));
+    setCart((current) => current.filter((item) => availableIds.has(item.productId)));
+  }, [products, loadingProducts]);
+
   const addToCart = useCallback((productId: string, quantity = 1) => {
     setCart((current) => {
       const existing = current.find((item) => item.productId === productId);

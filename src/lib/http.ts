@@ -10,12 +10,28 @@ export class HttpError extends Error {
 }
 
 export async function readJson(request: Request): Promise<Record<string, unknown>> {
+  const maxBytes = 65_536;
   const contentLength = Number(request.headers.get("content-length") || 0);
-  if (contentLength > 65_536) throw new HttpError(413, "Request body is too large.");
+  if (contentLength > maxBytes) throw new HttpError(413, "Request body is too large.");
 
+  if (!request.body) throw new HttpError(400, "Request body is required.");
+  const reader = request.body.getReader();
+  const chunks: Uint8Array[] = [];
+  let size = 0;
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    size += value.byteLength;
+    if (size > maxBytes) {
+      await reader.cancel();
+      throw new HttpError(413, "Request body is too large.");
+    }
+    chunks.push(value);
+  }
   let body: unknown;
   try {
-    body = await request.json();
+    const text = Buffer.concat(chunks).toString("utf8");
+    body = JSON.parse(text);
   } catch {
     throw new HttpError(400, "Request body must be valid JSON.");
   }
