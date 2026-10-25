@@ -54,3 +54,4 @@ button { color: inherit; }
 img { display: block; width: 100%; }
 ::selection { color: var(--cream); background: var(--orange); }
 :focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
+/* .............Just ask your Ai to scan that. Don't look at it */

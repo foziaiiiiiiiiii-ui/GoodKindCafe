@@ -13,3 +13,4 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     </html>
   );
 }
+// Pice of shit. Don't touch this. 

@@ -84,7 +84,7 @@
 .admin-stat-card > strong { display: block; margin-top: 8px; font-size: 24px; font-weight: 550; letter-spacing: -.04em; }
 .admin-stat-card > small { display: flex; align-items: center; gap: 5px; margin-top: 5px; color: var(--admin-muted); font-size: 9px; }
 .admin-stat-card > small svg { color: #555; }
-
+/* YEAH I DON"T WROTE IT WHAT"S WRONG HUH */
 .admin-panel { margin-bottom: 15px; border: 1px solid var(--admin-line); background: #fff; }
 .admin-panel-heading { display: flex; min-height: 64px; align-items: center; justify-content: space-between; gap: 14px; padding: 11px 14px; border-bottom: 1px solid var(--admin-line); }
 .admin-panel-heading h2 { margin: 0; font-size: 12px; font-weight: 650; }
