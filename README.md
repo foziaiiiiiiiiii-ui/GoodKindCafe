@@ -1,3 +1,7 @@
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/4857ab3e-220a-4cfc-8226-e84803564b0e" />
+
+
+
 # Goodkind Café
 
 A multi-page Next.js App Router café site with an editorial public storefront, responsive pickup cart, SQLite-backed order API, and a password-protected operations dashboard.
