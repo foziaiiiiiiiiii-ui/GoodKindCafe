@@ -12,7 +12,7 @@ const money = (cents: number) => `$${(cents / 100).toFixed(2)}`;
 export function CartDrawer() {
   const { products, cart, cartOpen, closeCart, setQuantity, removeFromCart } = useCafe();
   const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [confirmed, setConfirmed] = useState("");
@@ -51,7 +51,7 @@ export function CartDrawer() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           customerName: name,
-          customerPhone: phone,
+          customerEmail: email,
           items: lines.map(({ productId, quantity }) => ({ productId, quantity })),
         }),
       });
@@ -61,7 +61,7 @@ export function CartDrawer() {
       lines.forEach((line) => removeFromCart(line.productId));
       setConfirmed(result.id || "submitted");
       setName("");
-      setPhone("");
+      setEmail("");
     } catch (submitError) {
       setError(submitError instanceof Error ? submitError.message : "Your order could not be submitted.");
     } finally {
@@ -108,8 +108,8 @@ export function CartDrawer() {
             </div>
             <form className="checkout-form" onSubmit={submitOrder}>
               <h3>Pickup details</h3>
-              <label>Your name<input autoComplete="name" onChange={(event) => setName(event.target.value)} required value={name} /></label>
-              <label>Phone number<input autoComplete="tel" onChange={(event) => setPhone(event.target.value)} required type="tel" value={phone} /></label>
+              <label>Your name<input autoComplete="name" maxLength={100} onChange={(event) => setName(event.target.value)} required value={name} /></label>
+              <label>Email address<input autoComplete="email" maxLength={254} onChange={(event) => setEmail(event.target.value)} required type="email" value={email} /></label>
               {error && <p className="form-error" role="alert">{error}</p>}
               <div className="cart-total"><span>Total</span><strong>{money(total)}</strong></div>
               <button className="cafe-button cafe-button-dark checkout-button" disabled={!lines.length || submitting} type="submit">

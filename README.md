@@ -28,6 +28,6 @@ Run `npm run build`, then `npm start`. Use a Node.js host with a persistent writ
 - Public API: `GET /api/products`, `POST /api/orders`.
 - Admin API: `/api/admin/session`, `/api/admin/products`, `/api/admin/orders`.
 
-Admin can create and edit products, archive them from the public menu, view pickup orders, and update order status. Archiving preserves old orders. The cart persists in the visitor's browser until an order is submitted.
+Admin can create and edit products, archive them from the public menu, view pickup orders, and update order status. Archiving preserves old orders. The cart persists in the visitor's browser until an order is submitted. Pickup checkout collects the customer's name and email address; the server validates the email and recalculates all prices from the database.
 
 The public design tokens and typography live in `src/design-system.css`; admin-only colors and layout live in `src/app/admin.css`. Public headings use Geltek when installed locally, with a Georgia fallback; body text uses an Arial system fallback. Admin typography remains system UI. Public images load directly from Unsplash with lazy loading below the fold, avoiding the Next.js image-optimization proxy on first render.

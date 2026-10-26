@@ -21,7 +21,7 @@ export type OrderItem = CartItem & {
 export type CafeOrder = {
   id: string;
   customerName: string;
-  customerPhone: string;
+  customerEmail: string | null;
   items: OrderItem[];
   totalCents: number;
   status: "new" | "accepted" | "ready" | "completed" | "cancelled";

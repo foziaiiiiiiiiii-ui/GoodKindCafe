@@ -79,6 +79,44 @@ export function CafeProvider({ children }: { children: ReactNode }) {
     setCart((current) => current.filter((item) => availableIds.has(item.productId)));
   }, [products, loadingProducts]);
 
+  useEffect(() => {
+    if (!("IntersectionObserver" in window)) return undefined;
+    document.body.classList.add("has-reveal-motion");
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+    const observeReveals = (root: ParentNode) => {
+      root.querySelectorAll<HTMLElement>("main > section, main > .home-visit-link, .menu-card")
+        .forEach((element) => {
+          if (element.classList.contains("reveal-on-scroll")) return;
+          element.classList.add("reveal-on-scroll");
+          revealObserver.observe(element);
+        });
+    };
+    observeReveals(document);
+    const mutationObserver = new MutationObserver((records) => {
+      records.forEach((record) => record.addedNodes.forEach((node) => {
+        if (node instanceof HTMLElement) {
+          if (node.matches("main > section, main > .home-visit-link, .menu-card")) {
+            observeReveals(node.parentElement ?? document);
+          } else {
+            observeReveals(node);
+          }
+        }
+      }));
+    });
+    mutationObserver.observe(document.body, { childList: true, subtree: true });
+    return () => {
+      mutationObserver.disconnect();
+      revealObserver.disconnect();
+      document.body.classList.remove("has-reveal-motion");
+    };
+  }, []);
+
   const addToCart = useCallback((productId: string, quantity = 1) => {
     setCart((current) => {
       const existing = current.find((item) => item.productId === productId);

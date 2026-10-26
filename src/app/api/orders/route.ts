@@ -10,7 +10,10 @@ export async function POST(request: NextRequest) {
     assertSameOrigin(request);
     const body = await readJson(request);
     const customerName = cleanText(body.customerName, "Name", 100);
-    const customerPhone = cleanText(body.customerPhone, "Phone number", 40);
+    const customerEmail = cleanText(body.customerEmail, "Email address", 254).toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customerEmail)) {
+      throw new HttpError(400, "Enter a valid email address.");
+    }
     if (!Array.isArray(body.items) || body.items.length < 1 || body.items.length > 40) {
       throw new HttpError(400, "Add at least one product to your order.");
     }
@@ -40,9 +43,9 @@ export async function POST(request: NextRequest) {
     const totalCents = items.reduce((total, item) => total + item.unitPriceCents * item.quantity, 0);
     const id = randomUUID();
     db.prepare(`
-      INSERT INTO orders (id, customer_name, customer_phone, items_json, total_cents)
+      INSERT INTO orders (id, customer_name, customer_email, items_json, total_cents)
       VALUES (?, ?, ?, ?, ?)
-    `).run(id, customerName, customerPhone, JSON.stringify(items), totalCents);
+    `).run(id, customerName, customerEmail, JSON.stringify(items), totalCents);
 
     return NextResponse.json({ id, status: "new", totalCents }, { status: 201 });
   } catch (error) {

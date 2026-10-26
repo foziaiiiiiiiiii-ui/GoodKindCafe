@@ -110,7 +110,7 @@ export function AdminDashboard() {
     `${product.name} ${product.category} ${product.note}`.toLowerCase().includes(search.toLowerCase()),
   ), [products, search]);
   const filteredOrders = useMemo(() => orders.filter((order) =>
-    `${order.customerName} ${order.customerPhone} ${order.id} ${order.status}`.toLowerCase().includes(search.toLowerCase()),
+    `${order.customerName} ${order.customerEmail ?? ""} ${order.id} ${order.status}`.toLowerCase().includes(search.toLowerCase()),
   ), [orders, search]);
   const activeProducts = products.filter((product) => product.available).length;
   const newOrders = orders.filter((order) => order.status === "new").length;
@@ -316,7 +316,7 @@ export function AdminDashboard() {
                     {filteredOrders.slice(0, ordersView ? undefined : 5).map((order) => (
                       <tr key={order.id}>
                         <td><code>#{order.id.slice(0, 8)}</code></td>
-                        <td><strong>{order.customerName}</strong><small>{order.customerPhone}</small></td>
+                        <td><strong>{order.customerName}</strong><small>{order.customerEmail || "Email not recorded"}</small></td>
                         <td><span className="order-items-summary">{order.items.map((item) => `${item.quantity}× ${item.name}`).join(", ")}</span></td>
                         <td>{price(order.totalCents)}</td>
                         <td><label className={`order-status-select status-${order.status}`}><select aria-label={`Update order ${order.id.slice(0, 8)} status`} onChange={(event) => void updateOrder(order, event.target.value)} value={order.status}><option value="new">New</option><option value="accepted">Accepted</option><option value="ready">Ready</option><option value="completed">Completed</option><option value="cancelled">Cancelled</option></select><ChevronDown size={12} /></label></td>
